@@ -1,0 +1,47 @@
+{
+  "name": "vb",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "1.39.1-prel",
+  "publisher": "vscode",
+  "license": "MIT",
+  "engines": {
+    "vscode": "*"
+  },
+  "scripts": {},
+  "contributes": {
+    "languages": [
+      {
+        "id": "vb",
+        "extensions": [
+          ".vb",
+          ".brs",
+          ".vbs",
+          ".bas"
+        ],
+        "aliases": [
+          "Visual Basic",
+          "vb"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "vb",
+        "scopeName": "source.asp.vb.net",
+        "path": "./syntaxes/asp-vb-net.tmlanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "vb",
+        "path": "./snippets/vb.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theia-ide/vscode-builtin-extensions"
+  }
+}

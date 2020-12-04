@@ -1,52 +1,73 @@
-<br/>
-<div id="theia-logo" align="center">
-    <br />
-    <img src="https://raw.githubusercontent.com/eclipse-theia/theia/master/logo/theia-logo.svg?sanitize=true" alt="Theia Logo" width="300"/>
-    <h3>Cloud & Desktop IDE Platform</h3>
-</div>
+# theide-extension
+The example of how to build the Theia-based applications with the theide-extension.
 
-<div id="badges" align="center">
+## Getting started
 
-Eclipse Theia is an extensible platform to develop full-fledged multi-language Cloud & Desktop IDE-like products with state-of-the-art web  technologies.
+Install [nvm](https://github.com/creationix/nvm#install-script).
 
-</div>
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash
 
-[![Build Status](https://travis-ci.com/eclipse-theia/theia-example.svg?branch=master)](https://travis-ci.com/eclipse-theia/theia-example)
-[![Installers](https://img.shields.io/badge/download-installers-blue.svg?style=flat-curved)](https://download.eclipse.org/theia/)
+Install npm and node.
 
-[Main Theia Repository](https://github.com/eclipse-theia/theia)
+    nvm install 10
+    nvm use 10
 
-[Visit the Theia website](http://www.theia-ide.org) for more [documentation](http://www.theia-ide.org/doc).
+Install yarn.
 
-## License
+    npm install -g yarn
 
-- [Eclipse Public License 2.0](LICENSE)
-- [一 (Secondary) GNU General Public License, version 2 with the GNU Classpath Exception](LICENSE)
+## Running the browser example
 
-## Trademark
-"Theia" is a trademark of the Eclipse Foundation
-https://www.eclipse.org/theia
+    yarn rebuild:browser
+    cd browser-app
+    yarn start
 
-## Development
+Open http://localhost:3000 in the browser.
 
-### Build
+## Running the Electron example
 
-```sh
-yarn
-```
+    yarn rebuild:electron
+    cd electron-app
+    yarn start
 
-### Package the application
+## Developing with the browser example
 
-```sh
-yarn package
-```
+Start watching of theide-extension.
 
-### Create a preview application (without packaging it)
+    cd theide-extension
+    yarn watch
 
-```sh
-yarn package:preview
-```
+Start watching of the browser example.
 
-### Troubleshooting
+    yarn rebuild:browser
+    cd browser-app
+    yarn watch
 
-- [_"Don't expect that you can build app for all platforms on one platform."_](https://www.electron.build/multi-platform-build)
+Launch `Start Browser Backend` configuration from VS code.
+
+Open http://localhost:3000 in the browser.
+
+## Developing with the Electron example
+
+Start watching of theide-extension.
+
+    cd theide-extension
+    yarn watch
+
+Start watching of the electron example.
+
+    yarn rebuild:electron
+    cd electron-app
+    yarn watch
+
+Launch `Start Electron Backend` configuration from VS code.
+
+## Publishing theide-extension
+
+Create a npm user and login to the npm registry, [more on npm publishing](https://docs.npmjs.com/getting-started/publishing-npm-packages).
+
+    npm login
+
+Publish packages with lerna to update versions properly across local packages, [more on publishing with lerna](https://github.com/lerna/lerna#publish).
+
+    npx lerna publish

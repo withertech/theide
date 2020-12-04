@@ -1,0 +1,38 @@
+{
+  "name": "lua",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "1.39.1-prel",
+  "publisher": "vscode",
+  "license": "MIT",
+  "engines": {
+    "vscode": "*"
+  },
+  "scripts": {},
+  "contributes": {
+    "languages": [
+      {
+        "id": "lua",
+        "extensions": [
+          ".lua"
+        ],
+        "aliases": [
+          "Lua",
+          "lua"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "lua",
+        "scopeName": "source.lua",
+        "path": "./syntaxes/lua.tmLanguage.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theia-ide/vscode-builtin-extensions"
+  }
+}

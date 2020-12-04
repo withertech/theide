@@ -1,0 +1,43 @@
+{
+  "name": "clojure",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "1.39.1-prel",
+  "publisher": "vscode",
+  "license": "MIT",
+  "engines": {
+    "vscode": "*"
+  },
+  "scripts": {},
+  "contributes": {
+    "languages": [
+      {
+        "id": "clojure",
+        "aliases": [
+          "Clojure",
+          "clojure"
+        ],
+        "extensions": [
+          ".clj",
+          ".cljs",
+          ".cljc",
+          ".cljx",
+          ".clojure",
+          ".edn"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "clojure",
+        "scopeName": "source.clojure",
+        "path": "./syntaxes/clojure.tmLanguage.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theia-ide/vscode-builtin-extensions"
+  }
+}

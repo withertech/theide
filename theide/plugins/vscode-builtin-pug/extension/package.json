@@ -1,0 +1,40 @@
+{
+  "name": "pug",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "1.39.1-prel",
+  "publisher": "vscode",
+  "license": "MIT",
+  "engines": {
+    "vscode": "*"
+  },
+  "scripts": {},
+  "contributes": {
+    "languages": [
+      {
+        "id": "jade",
+        "extensions": [
+          ".jade",
+          ".pug"
+        ],
+        "aliases": [
+          "Pug",
+          "Jade",
+          "jade"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "jade",
+        "scopeName": "text.pug",
+        "path": "./syntaxes/pug.tmLanguage.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theia-ide/vscode-builtin-extensions"
+  }
+}

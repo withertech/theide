@@ -1,0 +1,25 @@
+{
+  "name": "theme-abyss",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "1.39.1-prel",
+  "publisher": "vscode",
+  "license": "MIT",
+  "engines": {
+    "vscode": "*"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Abyss",
+        "uiTheme": "vs-dark",
+        "path": "./themes/abyss-color-theme.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theia-ide/vscode-builtin-extensions"
+  },
+  "scripts": {}
+}

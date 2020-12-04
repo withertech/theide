@@ -1,0 +1,44 @@
+{
+  "name": "swift",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "1.39.1-prel",
+  "publisher": "vscode",
+  "license": "MIT",
+  "engines": {
+    "vscode": "*"
+  },
+  "scripts": {},
+  "contributes": {
+    "languages": [
+      {
+        "id": "swift",
+        "aliases": [
+          "Swift",
+          "swift"
+        ],
+        "extensions": [
+          ".swift"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "swift",
+        "scopeName": "source.swift",
+        "path": "./syntaxes/swift.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "swift",
+        "path": "./snippets/swift.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theia-ide/vscode-builtin-extensions"
+  }
+}

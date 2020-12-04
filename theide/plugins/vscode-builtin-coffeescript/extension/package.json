@@ -1,0 +1,52 @@
+{
+  "name": "coffeescript",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "1.39.1-prel",
+  "publisher": "vscode",
+  "license": "MIT",
+  "engines": {
+    "vscode": "*"
+  },
+  "scripts": {},
+  "contributes": {
+    "languages": [
+      {
+        "id": "coffeescript",
+        "extensions": [
+          ".coffee",
+          ".cson",
+          ".iced"
+        ],
+        "aliases": [
+          "CoffeeScript",
+          "coffeescript",
+          "coffee"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "coffeescript",
+        "scopeName": "source.coffee",
+        "path": "./syntaxes/coffeescript.tmLanguage.json"
+      }
+    ],
+    "breakpoints": [
+      {
+        "language": "coffeescript"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "coffeescript",
+        "path": "./snippets/coffeescript.snippets.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theia-ide/vscode-builtin-extensions"
+  }
+}
