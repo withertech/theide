@@ -1,15 +1,16 @@
-/**
- * Generated using theia-extension-generator
- */
-import { TheideExtensionCommandContribution, TheideExtensionMenuContribution } from './theide-extension-contribution';
-import {
-    CommandContribution,
-    MenuContribution
-} from "@theia/core/lib/common";
-import { ContainerModule } from "inversify";
+import { ContainerModule } from 'inversify';
+import { TheideExtensionWidget } from './theide-extension-widget';
+import { TheideExtensionContribution } from './theide-extension-contribution';
+import { bindViewContribution, FrontendApplicationContribution, WidgetFactory } from '@theia/core/lib/browser';
+
+import '../../src/browser/style/index.css';
 
 export default new ContainerModule(bind => {
-    // add your contribution bindings here
-    bind(CommandContribution).to(TheideExtensionCommandContribution);
-    bind(MenuContribution).to(TheideExtensionMenuContribution);
+    bindViewContribution(bind, TheideExtensionContribution);
+    bind(FrontendApplicationContribution).toService(TheideExtensionContribution);
+    bind(TheideExtensionWidget).toSelf();
+    bind(WidgetFactory).toDynamicValue(ctx => ({
+        id: TheideExtensionWidget.ID,
+        createWidget: () => ctx.container.get<TheideExtensionWidget>(TheideExtensionWidget)
+    })).inSingletonScope();
 });
