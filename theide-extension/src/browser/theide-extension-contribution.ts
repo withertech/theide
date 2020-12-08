@@ -3,7 +3,6 @@ import { MenuModelRegistry } from '@theia/core';
 import { TheideExtensionWidget } from './theide-extension-widget';
 import { AbstractViewContribution } from '@theia/core/lib/browser';
 import { Command, CommandRegistry } from '@theia/core/lib/common/command';
-
 export const TheideExtensionCommand: Command = { id: 'theide-extension:command' };
 
 @injectable()

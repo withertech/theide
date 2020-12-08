@@ -11,11 +11,15 @@
   "dependencies": {
     "@theia/core": "latest",
     "node-expect": "latest",
-    "duplex-child-process": "latest"
+    "duplex-child-process": "latest",
+    "electron-root-path": "latest",
+    "jsonfile": "latest",
+    "shortid": "latest"
   },
   "devDependencies": {
     "rimraf": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "@types/shortid": "latest"
   },
   "scripts": {
     "prepare": "yarn run clean && yarn run build",

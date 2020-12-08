@@ -15,6 +15,7 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "target": "es5",
+        "esModuleInterop": true,
         "jsx": "react",
         "lib": [
             "es6",
