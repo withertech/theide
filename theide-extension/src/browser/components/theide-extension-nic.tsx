@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as path from 'path';
-import fs from 'fs';
-import * as fse from 'fs-extra'
+import * as fs from 'fs-extra'
 import { root } from '../theide-extension-widget';
 export class Nic extends React.Component {
 	public state: any;
@@ -202,17 +201,17 @@ export class Nic extends React.Component {
         {
             if (!fs.existsSync(path.join(root, '.vscode')))
             {
-                fse.mkdirSync(path.join(root, '.vscode'));
+                fs.mkdirSync(path.join(root, '.vscode'));
             }
             if (!fs.existsSync(path.join(root, '.vscode/tasks.json')))
             {
-                fse.writeJSONSync(path.join(root, '.vscode/tasks.json'), Json);
+                fs.writeFileSync(path.join(root, '.vscode/tasks.json'), JSON.stringify(Json, null, 4));
             }
             else
             {
-                var JsonTmp = fse.readJSONSync(path.join(root, '.vscode/tasks.json'));
+                var JsonTmp = fs.readJSONSync(path.join(root, '.vscode/tasks.json'));
                 JsonTmp.tasks.push(task1, task2, task3);
-                fse.writeJSONSync(path.join(root, '.vscode/tasks.json'), JsonTmp);
+                fs.writeFileSync(path.join(root, '.vscode/tasks.json'), JSON.stringify(JsonTmp, null, 4));
             }
         }
         
@@ -628,7 +627,7 @@ export class Nic extends React.Component {
             }
         }
         let content;
-        if(fse.existsSync(path.join(root, 'theos')))
+        if(fs.existsSync(path.join(root, 'theos')))
         {
             content = (
                 <div className='theia-container'>

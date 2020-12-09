@@ -1,7 +1,7 @@
-import { injectable } from 'inversify';
+import { injectable, inject } from 'inversify';
 import { MenuModelRegistry } from '@theia/core';
 import { TheideExtensionWidget } from './theide-extension-widget';
-import { AbstractViewContribution } from '@theia/core/lib/browser';
+import { AbstractViewContribution, FrontendApplication } from '@theia/core/lib/browser';
 import { Command, CommandRegistry } from '@theia/core/lib/common/command';
 import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
 export const TheideExtensionCommand: Command = { id: 'theide-extension:command' };
@@ -30,9 +30,9 @@ export class TheideExtensionContribution extends AbstractViewContribution<Theide
     }
     async onStart(app: FrontendApplication): Promise<void> {
 
-            this.stateService.reachedState('ready').then(
-                () => this.openView({ reveal: false })
-            );
+        this.stateService.reachedState('ready').then(
+            () => this.openView({ reveal: false })
+        );
     }
     /**
      * Example command registration to open the widget from the menu, and quick-open.
