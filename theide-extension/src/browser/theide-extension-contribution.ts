@@ -2,7 +2,8 @@ import { injectable } from 'inversify';
 import { MenuModelRegistry } from '@theia/core';
 import { TheideExtensionWidget } from './theide-extension-widget';
 import { AbstractViewContribution } from '@theia/core/lib/browser';
-import { Command, CommandRegistry } from '@theia/core/lib/common/command';
+import { Command, CommandRegistry } from '@theia/core/lib/common';
+import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
 export const TheideExtensionCommand: Command = { id: 'theide-extension:command' };
 
 @injectable()
@@ -16,6 +17,9 @@ export class TheideExtensionContribution extends AbstractViewContribution<Theide
      * its location `area` (`main`, `left`, `right`, `bottom`), `mode`, and `ref`.
      * 
      */
+    @inject(FrontendApplicationStateService)
+    protected readonly stateService: FrontendApplicationStateService;
+    
     constructor() {
         super({
             widgetId: TheideExtensionWidget.ID,
@@ -24,7 +28,13 @@ export class TheideExtensionContribution extends AbstractViewContribution<Theide
             toggleCommandId: TheideExtensionCommand.id
         });
     }
-
+    async onStart(app: FrontendApplication): Promise<void> {
+        if (!this.workspaceService.opened) {
+            this.stateService.reachedState('ready').then(
+                () => this.openView({ reveal: true })
+            );
+        }
+    }
     /**
      * Example command registration to open the widget from the menu, and quick-open.
      * For a simpler use case, it is possible to simply call:
