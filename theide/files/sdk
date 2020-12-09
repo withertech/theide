@@ -1,0 +1,5 @@
+#!/bin/bash
+TMP=$(mktemp -d)
+git clone --progress https://github.com/theos/sdks.git $TMP 2>&1
+mv -v $TMP/iPhoneOS$2.sdk $1/theos/sdks/
+rm -r $TMP

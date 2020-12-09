@@ -14,7 +14,8 @@
     "duplex-child-process": "latest",
     "electron-root-path": "latest",
     "jsonfile": "latest",
-    "shortid": "latest"
+    "shortid": "latest",
+    "json-templater": "latest"
   },
   "devDependencies": {
     "rimraf": "latest",

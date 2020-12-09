@@ -5,16 +5,43 @@ import { MessageService, } from '@theia/core';
 import { WorkspaceService } from '@theia/workspace/lib/browser';
 import { Nic } from './components/theide-extension-nic';
 import { Sdk } from './components/theide-extension-sdk';
+import { Install } from './components/theide-extension-install';
 export var root: string = "/";
 
+
+@injectable()
+export class Logger
+{
+
+    @inject(MessageService)
+    protected static readonly messageService: MessageService;
+    static showLog(data: string)
+    {
+        this.messageService.log(data);
+    }
+
+    static showInfo(data: string)
+    {
+        this.messageService.info(data);
+    }
+
+    static showWarn(data: string)
+    {
+        this.messageService.warn(data);
+    }
+
+    static showError(data: string)
+    {
+        this.messageService.error(data);
+    }
+}
 
 @injectable()
 export class TheideExtensionWidget extends ReactWidget {
 
     static readonly ID = 'theide-extension-theos:widget';
     static readonly LABEL = 'Theos';
-    @inject(MessageService)
-    protected readonly messageService!: MessageService;
+
     @inject(WorkspaceService) protected readonly workspaceService: WorkspaceService;
 
     @postConstruct()
@@ -34,6 +61,8 @@ export class TheideExtensionWidget extends ReactWidget {
                 <Nic/>
                 <br/>
                 <Sdk/>
+                <br/>
+                <Install/>
             </div>
         );
     }

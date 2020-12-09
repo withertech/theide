@@ -16,7 +16,8 @@ extraResources:
   - from: plugins
     to: app/plugins
 extraFiles:
-  - nic
+  - from: files
+    to: files
 win:
   icon: resources/icon.ico
   target:
