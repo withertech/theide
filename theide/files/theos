@@ -77,18 +77,13 @@ done
 
 #-------------------------------------------------------------------------------
 # Check supported platforms
-PLATFORM=`uname -o`
-PLATFORMS=(Cygwin GNU/Linux) # still needs more iOS, macOS
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
 
-if [ "$SKIP_PLATFORMCHECK" == "N" ]; then
-  if [[ ! ${PLATFORMS[*]} =~ "$PLATFORM" ]]
-  then
-    echo_error "This script is not tested on your platform -- $PLATFORM."
-    echo_warning "Run with '--no-platformcheck Y' to skip this message."
-    echo;
-    exit 1
-  fi
-fi
 
 #-------------------------------------------------------------------------------
 # Display pre-installation summary to and prompt to confirm
@@ -182,6 +177,8 @@ echo_title " [DOWNLOADING THEOS...DONE]";
 
 #-------------------------------------------------------------------------------
 echo;
+
+if [machine == Linux]; then
 echo_title " [DOWNLOADING TOOLCHAIN....]";
 
   echo_info ">> Dowloading Linux toolchain...";
@@ -195,6 +192,7 @@ echo_title " [DOWNLOADING TOOLCHAIN....]";
   echo_info ">> Done.";
 
 echo_title " [DOWNLOADING TOOLCHAIN....DONE.]";
+fi
 #-------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------

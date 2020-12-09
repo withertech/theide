@@ -3,17 +3,14 @@
   "keywords": [
     "theia-extension"
   ],
-  "version": "0.0.0",
+  "version": "1.1.0",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
     "@theia/core": "latest",
-    "node-expect": "latest",
-    "duplex-child-process": "latest",
     "electron-root-path": "latest",
-    "jsonfile": "latest",
     "shortid": "latest",
     "json-templater": "latest"
   },
