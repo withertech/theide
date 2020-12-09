@@ -29,11 +29,10 @@ export class TheideExtensionContribution extends AbstractViewContribution<Theide
         });
     }
     async onStart(app: FrontendApplication): Promise<void> {
-        if (!this.workspaceService.opened) {
+
             this.stateService.reachedState('ready').then(
                 () => this.openView({ reveal: true })
             );
-        }
     }
     /**
      * Example command registration to open the widget from the menu, and quick-open.
