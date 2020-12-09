@@ -2,7 +2,7 @@ import { injectable } from 'inversify';
 import { MenuModelRegistry } from '@theia/core';
 import { TheideExtensionWidget } from './theide-extension-widget';
 import { AbstractViewContribution } from '@theia/core/lib/browser';
-import { Command, CommandRegistry } from '@theia/core/lib/common';
+import { Command, CommandRegistry } from '@theia/core/lib/common/command';
 import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
 export const TheideExtensionCommand: Command = { id: 'theide-extension:command' };
 
