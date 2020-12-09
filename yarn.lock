@@ -5472,11 +5472,6 @@ dugite-no-gpl@1.69.0:
     rimraf "^2.5.4"
     tar "^4.0.2"
 
-duplex-child-process@latest:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/duplex-child-process/-/duplex-child-process-1.0.1.tgz#d3868754b108726be9c665d810b989e87ae7833e"
-  integrity sha512-tWbt4tyioDjyK5nh+qicbdvBvNjSXsTUF5zKUwSauuKPg1mokjwn/HezwfvWhh6hXoLdgetY+ZlzU/sMwUMJkg==
-
 duplexer2@~0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.1.4.tgz#8b12dab878c0d69e3e7891051662a32fc6bddcc1"
@@ -8141,7 +8136,7 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsonfile@^6.0.1, jsonfile@latest:
+jsonfile@^6.0.1:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-6.1.0.tgz#bc55b2634793c679ec6403094eb13698a6ec0aae"
   integrity sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==
@@ -9274,11 +9269,6 @@ node-environment-flags@1.0.6:
   dependencies:
     object.getownpropertydescriptors "^2.0.3"
     semver "^5.7.0"
-
-node-expect@latest:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/node-expect/-/node-expect-0.1.0.tgz#d5d4d6fcd40a1ec81bd55ef56247329a6eb43f09"
-  integrity sha1-1dTW/NQKHsgb1V71Ykcymm60Pwk=
 
 node-fetch@^2.6.0:
   version "2.6.1"
