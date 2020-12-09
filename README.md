@@ -1,5 +1,7 @@
 # Theide
 Theide is an ide for developing theos based code
+
+Currently linux only. support for macOS is coming soon
 ## Getting started
 
 Install [nvm](https://github.com/creationix/nvm#install-script).
