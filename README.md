@@ -18,11 +18,11 @@ Install yarn.
 ```
 Install macOS dependencies
 ```bash
-    brew install ldid xz expect make git perl
+    brew install ldid xz expect make git perl ccls
 ```
 Install linux dependencies
 ```bash
-    apt install fakeroot git perl build-essential
+    apt install fakeroot git perl build-essential ccls
 ```
 ## Running
 ```bash

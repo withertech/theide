@@ -1,5 +1,8 @@
 {
   "private": true,
+  "name": "theide",
+  "description": "Theos Development Environment",
+  "productName": "Theide",
   "scripts": {
     "prepare": "lerna run prepare",
     "rebuild:electron": "theia rebuild:electron"

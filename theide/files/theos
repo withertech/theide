@@ -77,13 +77,26 @@ done
 
 #-------------------------------------------------------------------------------
 # Check supported platforms
-unameOut="$(uname -s)"
-case "${unameOut}" in
-    Linux*)     machine=Linux;;
-    Darwin*)    machine=Mac;;
-    *)          machine="UNKNOWN:${unameOut}"
+OS="`uname`"
+case $OS in
+  'Linux')
+    OS='Linux'
+    ;;
+  'FreeBSD')
+    OS='FreeBSD'
+    ;;
+  'WindowsNT')
+    OS='Windows'
+    ;;
+  'Darwin') 
+    OS='Mac'
+    ;;
+  'SunOS')
+    OS='Solaris'
+    ;;
+  'AIX') ;;
+  *) ;;
 esac
-
 
 #-------------------------------------------------------------------------------
 # Display pre-installation summary to and prompt to confirm
@@ -178,7 +191,7 @@ echo_title " [DOWNLOADING THEOS...DONE]";
 #-------------------------------------------------------------------------------
 echo;
 
-if [machine == Linux]; then
+if [[ "$OS" == "Linux" ]]; then
 echo_title " [DOWNLOADING TOOLCHAIN....]";
 
   echo_info ">> Dowloading Linux toolchain...";
