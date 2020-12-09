@@ -1,0 +1,207 @@
+#!/bin/bash
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+THEOS_FOLDER_NAME="theos"
+#-------------------------------------------------------------------------------
+# Variables for parameters
+THEOS_INSTALL_FOLDER=~/                       # -d | --installdir
+
+
+#-------------------------------------------------------------------------------
+# Other Variables
+
+# SDK_WEBSITE: The website where to download SDKS
+
+
+# CURL Options: This is use to download apt-cyg on Cygwin systems
+# -O  : Write output to a file named as the remote file
+# -L  : Follow redirects
+# -k  : Allow connections to SSL sites without certs
+# -s  : Silent mode. Don't output anything
+CURLCMD="curl -O -J -L -k -s"
+
+#-------------------------------------------------------------------------------
+# UI Functions: Just some fancy coloring to easily view installation progress
+HL_NORMAL="\e[39;49m"
+HL_YELLOW="\e[30;103m"
+HL_RED="\e[97;41m"
+FG_GREEN="\e[92m"
+FG_YELLOW="\e[93m"
+
+echo_title () {
+  local COLS=`expr $(tput cols) - 2`;
+  printf "${HL_YELLOW}%-${COLS}s${HL_NORMAL}\n" "$*"
+}
+echo_info () {
+  echo -e "${FG_GREEN}$*${HL_NORMAL}"
+}
+echo_warning () {
+  echo -e "${FG_YELLOW}$*${HL_NORMAL}"
+}
+echo_n_info () {
+  echo -n -e "${FG_GREEN}$*${HL_NORMAL}"
+}
+echo_error () {
+  echo;
+  echo -e "${HL_RED}$*${HL_NORMAL}"
+  echo;
+}
+#-------------------------------------------------------------------------------
+tput clear # this one works accross platforms
+
+#-------------------------------------------------------------------------------
+# start name parameters parser
+# https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
+# Use > 1 to consume two arguments per pass in the loop (e.g. each
+# argument has a corresponding value to go with it).
+# Use > 0 to consume one or more arguments per pass in the loop (e.g.
+# some arguments don't have a corresponding value to go with it such
+# as in the --default example).
+# note: if this is set to > 0 the /etc/hosts part is not recognized ( may be a bug )
+while [[ $# > 1 ]]
+do
+key="$1"
+
+case $key in
+    -d|--installdir)
+    THEOS_INSTALL_FOLDER="$2"
+    shift # past argument
+    ;;
+    *)
+    # unknown option
+    ;;
+esac
+shift # past argument or value
+done
+# end name parameters parser
+
+#-------------------------------------------------------------------------------
+# Check supported platforms
+PLATFORM=`uname -o`
+PLATFORMS=(Cygwin GNU/Linux) # still needs more iOS, macOS
+
+if [ "$SKIP_PLATFORMCHECK" == "N" ]; then
+  if [[ ! ${PLATFORMS[*]} =~ "$PLATFORM" ]]
+  then
+    echo_error "This script is not tested on your platform -- $PLATFORM."
+    echo_warning "Run with '--no-platformcheck Y' to skip this message."
+    echo;
+    exit 1
+  fi
+fi
+
+#-------------------------------------------------------------------------------
+# Display pre-installation summary to and prompt to confirm
+echo
+echo_info "THEOS will be installed with the following configuration."
+echo
+echo -e " THEOS_INSTALL_FOLDER     = ${THEOS_INSTALL_FOLDER}${THEOS_FOLDER_NAME}"
+
+echo;
+
+#-------------------------------------------------------------------------------
+# Display pre-installation check
+echo;
+echo_title " [PRE-SETUP CHECK...]"
+echo "";
+
+echo_info ">> Checking parameters..."
+
+# Check if the install folder is writable
+if [ ! -w "$THEOS_INSTALL_FOLDER" ]
+then
+  echo_error "$THEOS_INSTALL_FOLDER is not writeable. Run with sudo or choose another path."
+  exit 1
+fi
+
+# Check if theos already exists when not reinstalling
+  if [ -d "$THEOS_INSTALL_FOLDER$THEOS_FOLDER_NAME" ]; then
+    echo_error "THEOS is already installed in $THEOS_INSTALL_FOLDER$THEOS_FOLDER_NAME."
+    exit 1;
+  fi
+
+
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+echo
+echo_info ">> Ready to install."
+echo
+echo_title " [PRE-SETUP CHECK...DONE]";
+
+echo;
+
+echo;
+#-------------------------------------------------------------------------------
+# Install dependencies first
+
+
+
+#-------------------------------------------------------------------------------
+echo_title " [PREPARE INSTALL FOLDER...]";
+
+# If the install folder is missing, create it
+if [ ! -d "$THEOS_INSTALL_FOLDER" ]; then
+  mkdir -p $THEOS_INSTALL_FOLDER
+fi
+
+
+echo_title " [PREPARE INSTALL FOLDER...DONE]";
+
+#-------------------------------------------------------------------------------
+
+# go to the install folder
+pushd $THEOS_INSTALL_FOLDER > /dev/null
+
+#-------------------------------------------------------------------------------
+echo;
+echo_title " [DOWNLOADING THEOS...]";
+
+echo_info ">> Cloning git repo...";
+git clone --progress --recursive https://github.com/theos/theos.git $THEOS_FOLDER_NAME 2>&1
+GIT_RESPONSE=$?
+if [ "$GIT_RESPONSE" == "0" ]; then
+  echo_info ">> Done.";
+else
+  echo_error "Failed to download theos."
+  popd > /dev/null
+  exit 1
+fi
+
+# Change the owner of the install folder so that you won't have problems
+# when updating theos.
+if [[ "$SUDO_UID" != "" ]]  # assume sudo was used to force install
+then
+  echo_info ">> Owning theos folder...";
+  chown $SUDO_UID:$SUDO_GID $THEOS_FOLDER_NAME
+  echo_info ">> Done.";
+fi
+
+echo_title " [DOWNLOADING THEOS...DONE]";
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+echo;
+echo_title " [DOWNLOADING TOOLCHAIN....]";
+
+  echo_info ">> Dowloading Linux toolchain...";
+  curl -LO https://github.com/sbingner/llvm-project/releases/download/v10.0.0-1/linux-ios-arm64e-clang-toolchain.tar.lzma
+  echo_info ">> Extracting...";
+  TMP=$(mktemp -d)
+  tar --lzma -xvf linux-ios-arm64e-clang-toolchain.tar.lzma -C $TMP
+  mkdir -p $THEOS_FOLDER_NAME/toolchain/linux/iphone
+  mv $TMP/ios-arm64e-clang-toolchain/* $THEOS_FOLDER_NAME/toolchain/linux/iphone/
+  rm -r $TMP linux-ios-arm64e-clang-toolchain.tar.lzma
+  echo_info ">> Done.";
+
+echo_title " [DOWNLOADING TOOLCHAIN....DONE.]";
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+
+popd > /dev/null
+
+#-------------------------------------------------------------------------------
+echo;
+echo_info "THEOS install completed.";
+echo;
