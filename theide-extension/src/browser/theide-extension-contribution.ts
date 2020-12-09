@@ -31,7 +31,7 @@ export class TheideExtensionContribution extends AbstractViewContribution<Theide
     async onStart(app: FrontendApplication): Promise<void> {
 
             this.stateService.reachedState('ready').then(
-                () => this.openView({ reveal: true })
+                () => this.openView({ reveal: false })
             );
     }
     /**
