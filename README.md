@@ -30,11 +30,11 @@ Install linux dependencies
     cd theide
     yarn package:preview
 ```
-    on linux:
+on linux:
 ```
     dist/linux-unpacked/theide
 ```
-    on macOS:
+on macOS:
 ```
     dist/(placeholder)/theide
 ```
