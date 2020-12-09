@@ -36,7 +36,7 @@ on linux:
 ```
 on macOS:
 ```bash
-    dist/(placeholder)/theide
+    dist/mac/theide.app
 ```
 ## Packaging
 ```bash
