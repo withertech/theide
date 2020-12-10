@@ -80,7 +80,7 @@
     "prepare": "yarn clean && yarn build && yarn run download:plugins",
     "lint": "theiaext lint",
     "clean": "theia clean && rimraf node_modules",
-    "build": "theia rebuild:electron && yarn bundle && ln -rs ../node_modules/electron* ../theide/node_modules/",
+    "build": "theia rebuild:electron && yarn bundle && cp -r ../node_modules/electron* ../theide/node_modules/",
     "bundle": "theia build",
     "watch": "concurrently -n compile,bundle \"theiaext watch --preserveWatchOutput\" \"theia build --watch --mode development\"",
     "start": "theia start --plugins=local-dir:plugins",
