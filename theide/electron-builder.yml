@@ -28,6 +28,7 @@ mac:
   darkModeSupport: true
   target:
     - pkg
+    - dmg
 linux:
   icon: resources/icons
   category: Development
@@ -53,5 +54,3 @@ pkg:
   license: LICENSE
 deb:
   artifactName: ${productName}-${version}.${ext}
-
-#afterPack: ./scripts/after-pack.js
