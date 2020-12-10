@@ -1,38 +1,43 @@
-import { injectable, inject } from 'inversify';
-import { MenuModelRegistry } from '@theia/core';
-import { TheideExtensionWidget } from './theide-extension-widget';
-import { AbstractViewContribution, FrontendApplication } from '@theia/core/lib/browser';
-import { Command, CommandRegistry } from '@theia/core/lib/common/command';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-export const TheideExtensionCommand: Command = { id: 'theide-extension:command' };
+import { injectable, inject } from "inversify"
+import { MenuModelRegistry } from "@theia/core"
+import { TheideExtensionWidget } from "./theide-extension-widget"
+import {
+    AbstractViewContribution,
+    FrontendApplication,
+} from "@theia/core/lib/browser"
+import { Command, CommandRegistry } from "@theia/core/lib/common/command"
+import { FrontendApplicationStateService } from "@theia/core/lib/browser/frontend-application-state"
+export const TheideExtensionCommand: Command = {
+    id: "theide-extension:command",
+}
 
 @injectable()
-export class TheideExtensionContribution extends AbstractViewContribution<TheideExtensionWidget> {
-
+export class TheideExtensionContribution extends AbstractViewContribution<
+    TheideExtensionWidget
+> {
     /**
      * `AbstractViewContribution` handles the creation and registering
      *  of the widget including commands, menus, and keybindings.
-     * 
-     * We can pass `defaultWidgetOptions` which define widget properties such as 
+     *
+     * We can pass `defaultWidgetOptions` which define widget properties such as
      * its location `area` (`main`, `left`, `right`, `bottom`), `mode`, and `ref`.
-     * 
+     *
      */
     @inject(FrontendApplicationStateService)
-    protected readonly stateService: FrontendApplicationStateService;
-    
+    protected readonly stateService: FrontendApplicationStateService
+
     constructor() {
         super({
             widgetId: TheideExtensionWidget.ID,
             widgetName: TheideExtensionWidget.LABEL,
-            defaultWidgetOptions: { area: 'left' },
-            toggleCommandId: TheideExtensionCommand.id
-        });
+            defaultWidgetOptions: { area: "left" },
+            toggleCommandId: TheideExtensionCommand.id,
+        })
     }
     async onStart(app: FrontendApplication): Promise<void> {
-
-        this.stateService.reachedState('ready').then(
-            () => this.openView({ reveal: false })
-        );
+        this.stateService
+            .reachedState("ready")
+            .then(() => this.openView({ reveal: false }))
     }
     /**
      * Example command registration to open the widget from the menu, and quick-open.
@@ -54,8 +59,8 @@ export class TheideExtensionContribution extends AbstractViewContribution<Theide
      */
     registerCommands(commands: CommandRegistry): void {
         commands.registerCommand(TheideExtensionCommand, {
-            execute: () => super.openView({ activate: false, reveal: true })
-        });
+            execute: () => super.openView({ activate: false, reveal: true }),
+        })
     }
 
     /**
@@ -73,6 +78,6 @@ export class TheideExtensionContribution extends AbstractViewContribution<Theide
      * @param menus
      */
     registerMenus(menus: MenuModelRegistry): void {
-        super.registerMenus(menus);
+        super.registerMenus(menus)
     }
 }
