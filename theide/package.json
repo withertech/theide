@@ -2,7 +2,7 @@
   "name": "theide-ide",
   "description": "Theos Development Environment",
   "productName": "Theide",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "scripts/theide-electron-main.js",
   "license": "EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0",
   "author": "Witherking25 <witherking@withertech.com>",
