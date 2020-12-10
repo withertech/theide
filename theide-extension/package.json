@@ -11,13 +11,13 @@
   "dependencies": {
     "@theia/core": "latest",
     "electron-root-path": "latest",
-    "shortid": "latest",
-    "json-templater": "latest"
+    "json-templater": "latest",
+    "shortid": "latest"
   },
   "devDependencies": {
+    "@types/shortid": "latest",
     "rimraf": "latest",
-    "typescript": "latest",
-    "@types/shortid": "latest"
+    "typescript": "latest"
   },
   "scripts": {
     "prepare": "yarn run clean && yarn run build",
