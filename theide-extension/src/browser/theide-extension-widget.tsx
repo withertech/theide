@@ -5,6 +5,7 @@ import { MessageService } from "@theia/core"
 import { WorkspaceService } from "@theia/workspace/lib/browser"
 import { Nic } from "./components/theide-extension-nic"
 import { Sdk } from "./components/theide-extension-sdk"
+import { Device } from "./components/theide-extension-device"
 import { Install } from "./components/theide-extension-install"
 export var root: string = "/"
 
@@ -43,7 +44,7 @@ export class TheideExtensionWidget extends ReactWidget {
         this.title.label = TheideExtensionWidget.LABEL
         this.title.caption = TheideExtensionWidget.LABEL
         this.title.closable = false
-        this.title.iconClass = "fa fa-window-maximize" // example widget icon
+        this.title.iconClass = "fa fa-wrench"
         if (this.workspaceService.workspace)
             root = this.workspaceService.workspace.resource.path.toString()
         this.update()
@@ -52,11 +53,16 @@ export class TheideExtensionWidget extends ReactWidget {
     protected render(): React.ReactNode {
         return (
             <div id="widget-container">
-                <Nic />
-                <br />
-                <Sdk />
-                <br />
-                <Install />
+                <button className='theia-button' title='Refresh' onClick={() => this.update()}><i className="fa fa-refresh"></i></button>
+                <br/>
+                <Nic/>
+                <br/>
+                <Sdk/>
+                <br/>
+                <Device/>
+                <br/>
+                <Install/>
+                <br/>
             </div>
         )
     }

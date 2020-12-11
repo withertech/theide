@@ -169,6 +169,7 @@ echo_info ">> Cloning git repo...";
 git clone --progress --recursive https://github.com/theos/theos.git $THEOS_FOLDER_NAME 2>&1
 GIT_RESPONSE=$?
 if [ "$GIT_RESPONSE" == "0" ]; then
+  mkdir $THEOS_FOLDER_NAME/sdkstorage
   echo_info ">> Done.";
 else
   echo_error "Failed to download theos."
