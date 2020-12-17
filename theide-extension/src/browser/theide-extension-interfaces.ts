@@ -58,3 +58,36 @@ export interface DeviceItemInterface {
     handleDeviceRemove: (id: string) => void
     device: DeviceInterface
 }
+
+export interface ProjectInterface {
+    id: string
+    path: string
+    subdir: string
+    template: number
+    projname: string
+    pkgname: string
+    maintname: string
+    bfilter?: string
+    kfilter?: string
+    cprefix?: string
+    wsection?: string
+    subprojects: ProjectInterface[]
+}
+
+// Todo form interface
+export interface ProjectFormInterface {
+    projects: ProjectInterface[]
+    handleProjectCreate: (project: ProjectInterface) => void
+}
+
+// Todo list interface
+export interface ProjectListInterface {
+    handleProjectRemove: (id: string) => void
+    projects: ProjectInterface[]
+}
+
+// Todo item interface
+export interface ProjectItemInterface {
+    handleProjectRemove: (id: string) => void
+    project: ProjectInterface
+}
