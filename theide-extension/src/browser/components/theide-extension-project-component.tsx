@@ -671,7 +671,7 @@ const ProjectItem = (props: ProjectItemInterface) => {
 			<button className='theia-button' title='Remove' onClick={() => props.handleProjectRemove(props.project.id)}>Remove</button><br/><h1></h1>
 			<div>{(() => {
 				if (props.project.subprojects && props.project.subprojects.length > 0) {
-					console.log(JSON.stringify(props.project.subprojects));
+					
 					return (
 						<div>
 							<h3>Subprojects:</h3><br/>
@@ -960,9 +960,23 @@ export const Project = () => {
 		out.forEach(p => {
 			if (p.id === id)
 			{
-				fs.rmdirSync(path.join(root, p.subdir, p.projname), {recursive: true});
+				if (fs.existsSync(path.join(root, p.subdir, 'Makefile')))
+				{
+					fs.readFile(path.join(root, p.subdir, 'Makefile'), 'utf8', function (err,data) {
+						if (err) {
+						  return console.log(err);
+						}
+						const re = RegExp(String.raw`^SUBPROJECTS \+\= ${p.projname}$`, 'gm')
+						var result = data.replace(re, '');
+					  
+						fs.writeFile(path.join(root, p.subdir, 'Makefile'), result, 'utf8', function (err) {
+						   if (err) return console.log(err);
+						});
+					});
+					fs.rmdirSync(path.join(root, p.subdir, p.projname), {recursive: true});
+				}
 			}
-		})
+		});
 		out = out.filter(p => p.id !== id);
 
 		return out;
